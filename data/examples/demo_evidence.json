@@ -1,0 +1,15 @@
+[
+  {
+    "title": "Digital ID Draft Law 2024",
+    "source_type": "law",
+    "publisher_or_author": "Ministry of Innovation and Technology",
+    "publication_date": "2024-01-15",
+    "country_or_jurisdiction": "Ethiopia",
+    "institution": "MInT",
+    "domain_theme": "digital_identity",
+    "claim": "The digital ID system provides secure authentication.",
+    "evidence_summary": "Draft law describes biometric collection and authentication protocols.",
+    "reliability_level": 5,
+    "evidence_strength": 4
+  }
+]

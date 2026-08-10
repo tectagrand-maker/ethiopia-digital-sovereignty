@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ethiopia-digital-sovereignty"
+version = "0.1.0"
+authors = [
+  {name = "Research Team", email = "research@example.com"},
+]
+description = "Evidence database and comparative governance analysis framework for digital sovereignty."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "peewee",
+    "pydantic",
+    "pypdf",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]

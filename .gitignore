@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- Research data (added for this project) ----
+# Acquired raw source documents (may be large / copyrighted).
+# Keep provenance metadata, but do not commit the files by default.
+data/raw/*
+!data/raw/*/
+data/raw/*/*
+!data/raw/*/provenance.json
+
+# Generated extraction outputs
+data/processed/*.txt
