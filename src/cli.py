@@ -15,8 +15,12 @@ from src.evidence.collection import (
 from src.governance.analysis import (
     create_observation, get_comparative_data,
     comparison_to_json, comparison_to_csv,
+    comparative_baseline, create_evidence_relation, get_evidence_relations,
 )
 from src.governance.status import research_status_report, report_to_json
+from src.governance.matrix import (
+    coverage_matrix, research_matrix, matrix_to_csv,
+)
 
 
 def _source_row(s):
@@ -126,6 +130,29 @@ def main(argv=None):
     # ---- research-status ----
     subparsers.add_parser("research-status", help="Research coverage report (JSON)")
 
+    # ---- research-matrix ----
+    matrix_parser = subparsers.add_parser("research-matrix", help="Ethiopia governance evidence matrix")
+    matrix_parser.add_argument("--jurisdiction", default="Ethiopia")
+    matrix_parser.add_argument("--format", choices=["json", "csv"], default="json")
+
+    # ---- coverage-matrix ----
+    cov_parser = subparsers.add_parser("coverage-matrix", help="Evidence coverage matrix (jurisdiction x dimension)")
+    cov_parser.add_argument("--format", choices=["json", "csv"], default="json")
+
+    # ---- baseline ----
+    baseline_parser = subparsers.add_parser("baseline", help="Comparative baseline (methodological, not a ranking)")
+    baseline_parser.add_argument("--j1", required=True)
+    baseline_parser.add_argument("--j2", required=True)
+    baseline_parser.add_argument("--format", choices=["json", "csv"], default="json")
+
+    # ---- relation ----
+    rel_parser = subparsers.add_parser("relation", help="Record a relation between two evidence records")
+    rel_parser.add_argument("--evidence-a", required=True, type=int)
+    rel_parser.add_argument("--evidence-b", type=int)
+    rel_parser.add_argument("--type", help="supports|qualifies|contradicts|contextualizes")
+    rel_parser.add_argument("--notes", default=None)
+    rel_parser.add_argument("--list", action="store_true", help="List relations for --evidence-a")
+
     args = parser.parse_args(argv)
 
     if args.command == "init":
@@ -179,6 +206,62 @@ def main(argv=None):
                 print(result["text"])
     elif args.command == "research-status":
         print(report_to_json(research_status_report()))
+    elif args.command == "research-matrix":
+        data = research_matrix(jurisdiction=args.jurisdiction)
+        if args.format == "json":
+            print(json.dumps(data, indent=2, ensure_ascii=False))
+        else:
+            print(matrix_to_csv(data))
+    elif args.command == "coverage-matrix":
+        data = coverage_matrix()
+        if args.format == "json":
+            print(json.dumps(data, indent=2, ensure_ascii=False))
+        else:
+            import csv as _csv
+            import io as _io
+            buf = _io.StringIO()
+            writer = _csv.writer(buf)
+            writer.writerow(["jurisdiction", "governance_dimension", "source_count",
+                             "evidence_count", "observation_count", "status"])
+            for row in data:
+                writer.writerow([row["jurisdiction"], row["governance_dimension"],
+                                 row["source_count"], row["evidence_count"],
+                                 row["observation_count"], row["status"]])
+            print(buf.getvalue())
+    elif args.command == "baseline":
+        data = comparative_baseline(args.j1, args.j2)
+        if args.format == "json":
+            print(json.dumps(data, indent=2, ensure_ascii=False))
+        else:
+            import csv as _csv
+            import io as _io
+            buf = _io.StringIO()
+            writer = _csv.writer(buf)
+            writer.writerow(["dimension", "j1_status", "j1_evidence_count",
+                             "j2_status", "j2_evidence_count", "comparison_note"])
+            for dim in data["dimensions"]:
+                writer.writerow([
+                    dim["dimension"],
+                    dim[args.j1]["evidence_status"],
+                    dim[args.j1]["evidence_count"],
+                    dim[args.j2]["evidence_status"],
+                    dim[args.j2]["evidence_count"],
+                    dim["comparison_note"],
+                ])
+            print(buf.getvalue())
+    elif args.command == "relation":
+        if args.list:
+            print(json.dumps(get_evidence_relations(args.evidence_a), indent=2, ensure_ascii=False))
+        else:
+            if args.evidence_b is None or args.type is None:
+                print("Error: --evidence-b and --type are required unless --list is used.")
+                sys.exit(1)
+            try:
+                rel = create_evidence_relation(args.evidence_a, args.evidence_b, args.type, args.notes)
+                print(f"Created relation {rel.id}: {args.evidence_a} -{args.type}-> {args.evidence_b}")
+            except ValueError as e:
+                print(f"Error: {e}")
+                sys.exit(1)
     else:
         parser.print_help()
 

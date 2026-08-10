@@ -1,0 +1,12 @@
+[
+  {"file": "corpus/source_01_pdp_1321.json", "source_id": 1},
+  {"file": "corpus/source_02_digital_id_1284.json", "source_id": 2},
+  {"file": "corpus/source_03_computer_crime_958.json", "source_id": 3},
+  {"file": "corpus/source_04_etransactions_1205.json", "source_id": 4},
+  {"file": "corpus/source_05_digital_ethiopia_2025.json", "source_id": 5},
+  {"file": "corpus/source_08_worldbank_press.json", "source_id": 8},
+  {"file": "corpus/source_09_id4d_fayda.json", "source_id": 9},
+  {"file": "corpus/source_10_uneca.json", "source_id": 10},
+  {"file": "corpus/source_12_kenya_dpa.json", "source_id": 12},
+  {"file": "corpus/source_13_gdpr.json", "source_id": 13}
+]

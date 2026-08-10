@@ -227,3 +227,7 @@ data/raw/*/*
 
 # Generated extraction outputs
 data/processed/*.txt
+
+# Research database (rebuilt from committed manifests via scripts/rebuild_db.py)
+data/evidence.db*
+data/evidence.db-journal

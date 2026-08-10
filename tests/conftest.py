@@ -26,13 +26,15 @@ def eds_test_db(tmp_path, monkeypatch):
     # Re-bind every model to the test database.
     models.db = test_db
     for model in (models.Source, models.Evidence,
-                  models.GovernanceObservation, models.EvidenceObservation):
+                  models.GovernanceObservation, models.EvidenceObservation,
+                  models.EvidenceRelation):
         model._meta.database = test_db
 
     test_db.connect()
     test_db.create_tables([
         models.Source, models.Evidence,
         models.GovernanceObservation, models.EvidenceObservation,
+        models.EvidenceRelation,
     ])
 
     yield test_db

@@ -5,8 +5,8 @@ import datetime
 from collections import OrderedDict
 
 from src.evidence.models import (
-    Evidence, GovernanceObservation, EvidenceObservation,
-    DataStatus, GOVERNANCE_DIMENSIONS,
+    Evidence, GovernanceObservation, EvidenceObservation, EvidenceRelation,
+    DataStatus, GOVERNANCE_DIMENSIONS, EvidenceRelationType,
 )
 from playhouse.shortcuts import model_to_dict
 
@@ -74,6 +74,16 @@ def _observation_payload(obs):
     payload["evidence_ids"] = [eo.evidence.evidence_id for eo in obs.evidence_links]
     payload["evidence"] = [_evidence_metadata(eo.evidence.evidence_id) for eo in obs.evidence_links]
     payload["status"] = AVAILABLE_STATUS
+    # Triangulation (Phase 9): how many evidence records and distinct sources
+    # support this observation. Independence is NOT claimed automatically.
+    source_ids = {eo.evidence.source.source_id for eo in obs.evidence_links}
+    payload["evidence_count"] = len(payload["evidence_ids"])
+    payload["source_count"] = len(source_ids)
+    payload["support_type"] = (
+        "multi_source" if payload["source_count"] >= 2 else
+        "single_source" if payload["evidence_count"] >= 1 else
+        "none"
+    )
     return payload
 
 
@@ -169,3 +179,110 @@ def comparison_to_csv(data):
                 len(view["observations"]),
             ])
     return buf.getvalue()
+
+
+def comparative_baseline(j1, j2):
+    """Step 6 Phase 13/14: methodological comparative baseline.
+
+    For every dimension, report each jurisdiction's evidence/assessment/
+    confidence plus a comparison_note drawn from {similar_pattern,
+    different_pattern, not_comparable, insufficient_evidence}.
+
+    These are analytical classifications, NOT scores. If either side is
+    missing_evidence the note defaults to insufficient_evidence unless the
+    user has explicitly classified otherwise via evidence relations.
+    """
+    data = get_comparative_data(j1, j2)
+    result = {
+        "report_type": "comparative_baseline",
+        "comparison": {"jurisdiction_a": j1, "jurisdiction_b": j2},
+        "note": (
+            "Methodological comparison. Where evidence is not comparable the "
+            "state is marked insufficient_evidence or not_comparable -- never "
+            "a score."
+        ),
+        "dimensions": [],
+    }
+    for dim in data["dimensions"]:
+        view_a = dim[j1]
+        view_b = dim[j2]
+        result["dimensions"].append({
+            "dimension": dim["dimension"],
+            j1: {
+                "evidence_status": view_a["status"],
+                "assessment": view_a["assessment"],
+                "confidence": view_a["confidence"],
+                "evidence_count": len(view_a["evidence_ids"]),
+            },
+            j2: {
+                "evidence_status": view_b["status"],
+                "assessment": view_b["assessment"],
+                "confidence": view_b["confidence"],
+                "evidence_count": len(view_b["evidence_ids"]),
+            },
+            "comparison_note": _comparison_note(view_a, view_b),
+        })
+    return result
+
+
+def _comparison_note(view_a, view_b):
+    a_avail = view_a["status"] == AVAILABLE_STATUS
+    b_avail = view_b["status"] == AVAILABLE_STATUS
+    if a_avail and b_avail:
+        # Both have evidence: we can begin to compare patterns.
+        a_confidence = [c for c in view_a["confidence"] if c]
+        b_confidence = [c for c in view_b["confidence"] if c]
+        if not a_confidence or not b_confidence:
+            return "insufficient_evidence"
+        avg_a = sum(a_confidence) / len(a_confidence)
+        avg_b = sum(b_confidence) / len(b_confidence)
+        if abs(avg_a - avg_b) >= 2:
+            return "different_pattern"
+        return "similar_pattern"
+    if a_avail or b_avail:
+        return "insufficient_evidence"
+    return "not_comparable"
+
+
+def create_evidence_relation(evidence_a_id, evidence_b_id, relation_type, notes=None):
+    """Record a structured relationship between two evidence records.
+
+    Used to document contradictions and other relations without silently
+    resolving them. Returns the EvidenceRelation row.
+    """
+    if relation_type not in {e.value for e in EvidenceRelationType}:
+        raise ValueError(
+            f"Invalid relation_type {relation_type!r}. Must be one of "
+            f"{sorted(e.value for e in EvidenceRelationType)}"
+        )
+    ea = Evidence.get_or_none(Evidence.evidence_id == evidence_a_id)
+    eb = Evidence.get_or_none(Evidence.evidence_id == evidence_b_id)
+    if not ea or not eb:
+        raise ValueError("Both evidence IDs must exist.")
+    return EvidenceRelation.create(
+        evidence_a=ea,
+        evidence_b=eb,
+        relation_type=relation_type,
+        notes=notes,
+    )
+
+
+def get_evidence_relations(evidence_id):
+    """Return all relations touching the given evidence record."""
+    relations = EvidenceRelation.select().where(
+        (EvidenceRelation.evidence_a == evidence_id)
+        | (EvidenceRelation.evidence_b == evidence_id)
+    )
+    out = []
+    for rel in relations:
+        if rel.evidence_a.evidence_id == evidence_id:
+            other = rel.evidence_b.evidence_id
+        else:
+            other = rel.evidence_a.evidence_id
+        out.append({
+            "evidence_id": evidence_id,
+            "related_evidence_id": other,
+            "relation_type": rel.relation_type,
+            "notes": rel.notes,
+        })
+    return out

@@ -131,8 +131,16 @@ python -m src.cli evidence show --id 1
 Ingest evidence from JSON or CSV (linked to a source):
 
 ```bash
-python -m src.cli ingest --type json --file data/evidence/real_corpus_001.json --source-id 12
+python -m src.cli ingest --type json --file data/evidence/corpus/source_12_kenya_dpa.json --source-id 12
 python -m src.cli ingest --type csv --file data/examples/demo_evidence.csv --source-id 1
+```
+
+The committed corpus lives in `data/evidence/corpus/` and is imported by
+`corpus_manifest.json`. The whole database (sources, evidence, observations)
+can be rebuilt reproducibly from committed files:
+
+```bash
+python scripts/rebuild_db.py --drop
 ```
 
 Evidence records distinguish `source_excerpt` (what the source says),
@@ -168,7 +176,24 @@ python -m src.cli research-status
 ```
 
 Produces a research-coverage report (source counts, evidence counts, dimensions
-with missing evidence). It is a data-quality report, not a governance score.
+with missing evidence, locator completeness, single/multi-source observations,
+unresolved contradictions). It is a data-quality report, not a governance score.
+
+## Research matrix, coverage and baseline (Step 6)
+
+```bash
+python -m src.cli research-matrix --jurisdiction Ethiopia   # 12-dimension Ethiopia matrix
+python -m src.cli coverage-matrix --format csv              # jurisdiction x dimension grid
+python -m src.cli baseline --j1 Ethiopia --j2 Kenya         # methodological comparative baseline
+python -m src.cli relation --evidence-a 1 --evidence-b 19 --type contextualizes --notes "..."
+```
+
+Evidence records carry an `evidence_basis` classification
+(`normative | institutional | technical | empirical | implementation |
+observational`) describing what a record can establish. Relations between
+evidence records (`supports | qualifies | contradicts | contextualizes`) are
+recorded without silently resolving conflicts. See
+`docs/evidence-matrix.md` and `docs/research-gaps.md`.
 
 ## Running tests
 
@@ -178,10 +203,9 @@ python -m pytest
 
 ## Demo data warning
 
-Files under `data/examples/`, `data/evidence/real_corpus_001.json` and the
-synthetic records created in tests are **demonstration fixtures**. Synthetic
-records are explicitly labelled `data_status: synthetic`. Do not present them as
-real research findings.
+Files under `data/examples/` and the synthetic records created in tests are
+**demonstration fixtures**. Synthetic records are explicitly labelled
+`data_status: synthetic`. Do not present them as real research findings.
 
 ## Documentation
 
@@ -189,13 +213,17 @@ real research findings.
 - `docs/evidence-methodology.md` — source vs evidence vs claim vs interpretation
 - `docs/source-collection.md` — source registry, acquisition, provenance, integrity
 - `docs/comparative-analysis.md` — dimensions, observations, missing evidence
+- `docs/evidence-matrix.md` — Step 6 matrix, status derivation, evidence basis
+- `docs/research-gaps.md` — current corpus gaps and priorities
 
 ## Current limitations
 
-- Only a small number of sources have been acquired and extracted so far.
+- Only a subset of catalog sources have been acquired and extracted so far.
 - PDF text extraction is `pypdf`-based and does not handle image-only PDFs (no OCR).
-- Governance observations exist only for a few evidence records; most dimensions
-  remain `missing_evidence`.
+- Ethiopia governance observations cover 9 of 12 dimensions; `transparency`,
+  `interoperability` and `private_sector_dependence` remain `missing_evidence`.
+- The comparative baseline classifies patterns from confidence and must be read
+  together with the assessment text (see `docs/evidence-matrix.md`).
 - No frontend/UI yet.
 
 ## What comes next

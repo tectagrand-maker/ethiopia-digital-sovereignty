@@ -1,0 +1,184 @@
+[
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "Personal Data Protection Proclamation No. 1321/2024",
+      "dimension": "data_governance",
+      "indicator": "Existence and comprehensiveness of a personal data protection framework",
+      "observed_evidence": "Ethiopia had no comprehensive personal data protection law or delegated oversight authority as of early 2024 (UNECA). The Personal Data Protection Proclamation No. 1321/2024, gazetted 24 July 2024, subsequently established a comprehensive framework with consent conditions, data subject rights and a supervisory authority.",
+      "assessment": "A comprehensive data protection law now exists on paper (2024); the earlier gap is documented by UNECA as of early 2024.",
+      "confidence": 3,
+      "analytical_notes": "Time-limited evidence: ev19 (UNECA) reflects the state before the 2024 law; ev1 evidences the later legal framework. Does not evidence enforcement or operational implementation of PDP 1321/2024.",
+      "data_status": "real"
+    },
+    "evidence_ids": [1, 19]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "Fayda / Ethiopian Digital Identification Proclamation No. 1284/2023",
+      "dimension": "digital_identity",
+      "indicator": "Legal basis and scale of the national digital ID system",
+      "observed_evidence": "Fayda is established under Digital ID Proclamation 1284/2023, which requires consent-based authentication and regulatory approval before digital ID is made mandatory for a service. The World Bank approved US$350M in support targeting at least 90 million registrants; more than 3.5 million had registered in pilots by December 2023.",
+      "assessment": "Ethiopia has a legal basis and substantial donor-backed financing for a national digital ID, with a consent-based architecture on paper and an early pilot registration base.",
+      "confidence": 4,
+      "analytical_notes": "Normative evidence (law) plus institutional evidence (World Bank). Registration numbers are the financier's stated figures, not an independent audit.",
+      "data_status": "real"
+    },
+    "evidence_ids": [6, 9, 16]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "PDP 1321/2024; Digital ID 1284/2023; E-Transactions 1205/2020",
+      "dimension": "consent_individual_agency",
+      "indicator": "Consent standard for processing and authentication",
+      "observed_evidence": "Ethiopian law adopts a consent-opt-in standard across multiple statutes: PDP consent must be free, informed, specific, clear and require an active action (Art. 8); Digital ID requires registrant consent for authentication with a signed consent form (Art. 17); e-transactions cannot be made mandatory without consent (Art. 4); the Fayda legal framework requires consent before any authentication.",
+      "assessment": "A consistent consent-opt-in legal standard applies across data protection, digital ID and e-transactions statutes.",
+      "confidence": 4,
+      "analytical_notes": "All records are normative (legal text) except ev17 which reports the legal framework per an ID4D study. Establishes the legal standard, not consent practice in the field.",
+      "data_status": "real"
+    },
+    "evidence_ids": [1, 6, 7, 12, 17]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "PDP 1321/2024",
+      "dimension": "data_localization",
+      "indicator": "Requirement to store personal data within Ethiopia",
+      "observed_evidence": "Article 22 (Data Sovereignty) of PDP 1321/2024 requires every controller/processor to store personal data collected or obtained locally on a server or data center located in Ethiopia, permits designation of critical personal data that may only be processed in Ethiopia, and requires prior Authority approval for cross-border transfer of sensitive personal data.",
+      "assessment": "Ethiopian law imposes an explicit territorial data-storage mandate with state-designated critical data categories and a prior-approval cross-border transfer regime.",
+      "confidence": 5,
+      "analytical_notes": "Direct statutory text (Art. 22). Establishes the legal rule; does not evidence enforcement or exemption practice.",
+      "data_status": "real"
+    },
+    "evidence_ids": [2]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "PDP 1321/2024; Digital ID 1284/2023",
+      "dimension": "institutional_accountability",
+      "indicator": "Designated supervisory and grievance institutions",
+      "observed_evidence": "PDP 1321/2024 designates the Ethiopian Communications Authority (established under Communications Proclamation 1148/2019) as supervisory authority with functions including a register of controllers and complaint investigation. Digital ID Proclamation 1284/2023 requires the Institution to establish a complaint handling department.",
+      "assessment": "Designated oversight institutions exist on paper for both data protection and digital ID, with defined complaint-handling mandates.",
+      "confidence": 4,
+      "analytical_notes": "Normative/institutional evidence. Establishes institutional mandates, not operational capacity or enforcement records.",
+      "data_status": "real"
+    },
+    "evidence_ids": [4, 8]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "Digital Ethiopia 2025 strategy",
+      "dimension": "state_capacity",
+      "indicator": "Government capacity to establish digital infrastructure",
+      "observed_evidence": "The Digital Ethiopia 2025 strategy records that after multiple National ID project attempts over eight years (2010-2018) the Government had not firmly established a National ID, with a digital ID pilot begun in Addis Ababa. It also acknowledges Ethiopia had not undergone a cybersecurity assessment and faced a lack of cybersecurity experts and user awareness.",
+      "assessment": "The government's own strategy documents repeated institutional failure in establishing a national ID and acknowledged cybersecurity capacity gaps.",
+      "confidence": 3,
+      "analytical_notes": "Government self-report (policy document). Evidence of stated institutional challenges, not an independent evaluation of capacity.",
+      "data_status": "real"
+    },
+    "evidence_ids": [14, 15]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "Computer Crime Proclamation 958/2016",
+      "dimension": "security_resilience",
+      "indicator": "Judicial authorization and electronic evidence framework",
+      "observed_evidence": "The Computer Crime Proclamation 958/2016 requires a court warrant for search or access of computer systems for computer crime investigation, and provides for admissibility and authenticity of electronic evidence. The Digital Ethiopia 2025 strategy separately acknowledges cybersecurity assessment gaps.",
+      "assessment": "A procedural framework for computer crime investigation exists (warrant requirement, electronic evidence rules), while cybersecurity assessment capacity gaps are acknowledged at the strategic level.",
+      "confidence": 3,
+      "analytical_notes": "Normative evidence (law) plus observational/self-report evidence (strategy). Legal safeguards do not evidence security posture.",
+      "data_status": "real"
+    },
+    "evidence_ids": [10, 11, 15]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "Digital ID 1284/2023; Computer Crime 958/2016; PDP 1321/2024",
+      "dimension": "legal_regulatory_safeguards",
+      "indicator": "Formal safeguards on mandatory use, data access and state powers",
+      "observed_evidence": "Legal safeguards include: regulator approval before digital ID can be made mandatory for a service and consent-based data access for relying parties (Digital ID Art. 15); a court-warrant requirement for computer system search (Computer Crime); and a right to lodge written complaints with the Authority (PDP Art. 58).",
+      "assessment": "Ethiopian statutes impose multiple formal legal safeguards on mandatory ID use, state access to computer systems and data subject complaint channels.",
+      "confidence": 4,
+      "analytical_notes": "Normative evidence. Establishes formal safeguards; does not evidence their application in practice.",
+      "data_status": "real"
+    },
+    "evidence_ids": [5, 9, 10]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "PDP 1321/2024; Digital ID 1284/2023; Fayda ID4D study",
+      "dimension": "citizen_rights_redress",
+      "indicator": "Data subject rights and complaint/redress channels",
+      "observed_evidence": "PDP 1321/2024 codifies data subject rights (informed, access free of charge, erasure, objection, restriction, portability) and a right to lodge written complaints (Art. 58). Digital ID Proclamation mandates a complaint handling department with court recourse (Art. 20). An ID4D study reports NIDP operates grievance channels including phone, social media, call center, website and helpdesks.",
+      "assessment": "Formal data subject rights and multiple complaint/redress channels are established by law and operational channels are reported.",
+      "confidence": 4,
+      "analytical_notes": "Normative evidence (rights, complaint rights) plus implementation evidence (ID4D report on grievance channels). Reported channels do not evidence resolution outcomes.",
+      "data_status": "real"
+    },
+    "evidence_ids": [3, 5, 8, 18]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Kenya",
+      "system_name": "Kenya Data Protection Act, 2019",
+      "dimension": "consent_individual_agency",
+      "indicator": "Consent standard for processing",
+      "observed_evidence": "Section 2 of the Kenya Data Protection Act 2019 defines consent as any manifestation of express, unequivocal, free, specific and informed indication of the data subject's wishes by statement or clear affirmative action.",
+      "assessment": "Kenya law adopts a strict, consent-opt-in statutory definition of consent.",
+      "confidence": 5,
+      "analytical_notes": "Direct statutory text (s.2). Establishes the legal standard, not consent practice.",
+      "data_status": "real"
+    },
+    "evidence_ids": [20]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Kenya",
+      "system_name": "Kenya Data Protection Act, 2019",
+      "dimension": "citizen_rights_redress",
+      "indicator": "Enumerated data subject rights",
+      "observed_evidence": "Section 26 of the Kenya Data Protection Act 2019 grants data subjects rights to be informed, to access personal data, to object to processing, to correction of false/misleading data and to deletion.",
+      "assessment": "Kenya law codifies an enumerated set of data subject rights enforceable against controllers.",
+      "confidence": 5,
+      "analytical_notes": "Direct statutory text (s.26). Establishes formal rights, not enforcement experience.",
+      "data_status": "real"
+    },
+    "evidence_ids": [21]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Kenya",
+      "system_name": "Kenya Data Protection Act, 2019",
+      "dimension": "institutional_accountability",
+      "indicator": "Dedicated data protection regulator",
+      "observed_evidence": "Section 5 of the Kenya Data Protection Act 2019 establishes the Office of the Data Protection Commissioner as a body corporate with perpetual succession, capable of suing and being sued, contracting and performing legal acts.",
+      "assessment": "Kenya has a dedicated statutory data protection regulator (ODPC) with independent legal personality.",
+      "confidence": 5,
+      "analytical_notes": "Normative/institutional evidence. Establishes institutional design, not regulatory effectiveness.",
+      "data_status": "real"
+    },
+    "evidence_ids": [22]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Kenya",
+      "system_name": "Kenya Data Protection Act, 2019",
+      "dimension": "data_localization",
+      "indicator": "Territorial storage mandate versus conditional transfer",
+      "observed_evidence": "Section 48 of the Kenya Data Protection Act 2019 permits transfer of personal data out of Kenya only where the controller or processor has given proof to the Data Commissioner of appropriate safeguards for security and protection of the personal data.",
+      "assessment": "Kenya does not mandate local storage; it permits cross-border transfers subject to a safeguards-based approval by the Data Commissioner.",
+      "confidence": 5,
+      "analytical_notes": "Direct statutory text (s.48). Contrasts with Ethiopia's Art. 22 localization mandate; a substance-level difference that the confidence-based baseline heuristic alone may not flag.",
+      "data_status": "real"
+    },
+    "evidence_ids": [23]
+  }
+]

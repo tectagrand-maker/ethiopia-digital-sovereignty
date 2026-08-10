@@ -49,6 +49,41 @@ class JurisdictionGroup(Enum):
     COMPARATIVE = 'comparative'
     INTERNATIONAL = 'international'
 
+class EvidenceBasis(Enum):
+    """Classification of what a piece of evidence can establish (Step 6).
+
+    - normative:      primary legal/policy text; establishes what the law
+                      requires, rights formally recognised, procedures prescribed
+    - institutional:  describes institutions, their powers, organisational set-up
+    - technical:      technical architecture, systems, standards
+    - empirical:      observed data, studies, surveys, field findings
+    - implementation: descriptions of actual rollout, deployment, practice
+    - observational:  on-the-ground observation / journalism / qualitative accounts
+
+    A single law may produce both normative and institutional evidence. This
+    classification does NOT by itself indicate how well a requirement is
+    implemented in practice (see docs/evidence-methodology.md).
+    """
+    NORMATIVE = 'normative'
+    INSTITUTIONAL = 'institutional'
+    TECHNICAL = 'technical'
+    EMPIRICAL = 'empirical'
+    IMPLEMENTATION = 'implementation'
+    OBSERVATIONAL = 'observational'
+
+class EvidenceRelationType(Enum):
+    """How two evidence records relate to each other (Step 6, contradictions).
+
+    - supports:        evidence B supports the same proposition as evidence A
+    - qualifies:       evidence B narrows/conditions the proposition in A
+    - contradicts:     evidence B conflicts with evidence A
+    - contextualizes:  evidence B provides context for evidence A
+    """
+    SUPPORTS = 'supports'
+    QUALIFIES = 'qualifies'
+    CONTRADICTS = 'contradicts'
+    CONTEXTUALIZES = 'contextualizes'
+
 # Stable machine-readable governance dimension identifiers (see docs/comparative-analysis.md)
 GOVERNANCE_DIMENSIONS = [
     "data_governance",
@@ -117,6 +152,7 @@ class Evidence(BaseModel):
     reliability_level = IntegerField()
     evidence_strength = IntegerField()
     methodology_or_basis = TextField(null=True)
+    evidence_basis = CharField(null=True)
     relevant_policy_or_law = CharField(null=True)
     keywords = TextField(null=True)
     notes = TextField(null=True)
@@ -143,7 +179,19 @@ class EvidenceObservation(BaseModel):
     observation = ForeignKeyField(GovernanceObservation, backref='evidence_links')
     evidence = ForeignKeyField(Evidence, backref='observation_links')
 
+class EvidenceRelation(BaseModel):
+    """Structured relationship between two evidence records.
+
+    Used to document support, qualification, contradiction and contextual
+    relationships without silently resolving conflicts (Step 6).
+    """
+    evidence_a = ForeignKeyField(Evidence, backref='relations_a')
+    evidence_b = ForeignKeyField(Evidence, backref='relations_b')
+    relation_type = CharField()
+    notes = TextField(null=True)
+    created_at = DateTimeField(default=datetime.datetime.now)
+
 def initialize_db():
     db.connect(reuse_if_open=True)
-    db.create_tables([Source, Evidence, GovernanceObservation, EvidenceObservation])
+    db.create_tables([Source, Evidence, GovernanceObservation, EvidenceObservation, EvidenceRelation])
     db.close()

@@ -4,7 +4,8 @@ from datetime import date
 from typing import List, Optional
 from pydantic import BaseModel, Field, field_validator, ValidationError
 from src.evidence.models import (
-    Evidence, Source, SourceType, DataStatus, GOVERNANCE_DIMENSIONS, RESEARCH_DOMAINS,
+    Evidence, Source, SourceType, DataStatus,
+    EvidenceBasis, GOVERNANCE_DIMENSIONS, RESEARCH_DOMAINS,
 )
 
 LOCATOR_TYPES = {
@@ -30,6 +31,7 @@ class EvidenceSchema(BaseModel):
     reliability_level: int = Field(..., ge=1, le=5)
     evidence_strength: int = Field(..., ge=1, le=5)
     methodology_or_basis: Optional[str] = None
+    evidence_basis: Optional[str] = None
     relevant_policy_or_law: Optional[str] = None
     keywords: Optional[str] = None
     notes: Optional[str] = None
@@ -64,6 +66,15 @@ class EvidenceSchema(BaseModel):
         if v not in RESEARCH_DOMAINS:
             raise ValueError(
                 f"Invalid domain_theme: {v}. Use one of the controlled research domains: {RESEARCH_DOMAINS}"
+            )
+        return v
+
+    @field_validator('evidence_basis')
+    @classmethod
+    def validate_evidence_basis(cls, v):
+        if v is not None and v not in {e.value for e in EvidenceBasis}:
+            raise ValueError(
+                f"Invalid evidence_basis: {v}. Must be one of {sorted(e.value for e in EvidenceBasis)}"
             )
         return v
 

@@ -1,0 +1,27 @@
+[
+  {
+    "title": "UNECA: no comprehensive Ethiopian personal data protection law as of early 2024",
+    "source_type": "institutional_report",
+    "publisher_or_author": "United Nations Economic Commission for Africa (UNECA)",
+    "publication_date": "2024-01-18",
+    "country_or_jurisdiction": "Ethiopia",
+    "institution": "UNECA",
+    "domain_theme": "data_governance",
+    "claim": "As of early 2024, Ethiopia lacked a comprehensive personal data protection framework and a delegated supervisory authority, with a draft data protection proclamation awaiting parliamentary approval.",
+    "evidence_summary": "UNECA's 2024 country profile states Ethiopia was not signatory to the AU Malabo Convention, had no comprehensive personal data protection legal framework or delegated oversight authority, and that a draft personal data protection proclamation had been submitted to parliament awaiting approval.",
+    "source_excerpt": "Without a comprehensive legal framework for personal data protection or a government authority delegated with oversight, companies are free to manage data as they see fit... However, a draft proclamation on protection of personal data has been submitted to parliament and is waiting approval.",
+    "interpretation": "Documents the pre-2024 legal gap. Note: this reflects the state as of the report date (early 2024); the Personal Data Protection Proclamation No. 1321/2024 was gazetted 24 July 2024, after this report. This evidence does not support claims about the post-2024 legal state.",
+    "source_url": "https://dtri.uneca.org/v1/uploads/country-profile/eth-country-profile-en.pdf",
+    "citation": "UNECA, 'Digital Trade Country Profile: Ethiopia' (2024), pp.8-9.",
+    "reliability_level": 4,
+    "evidence_strength": 4,
+    "methodology_or_basis": "Institutional country profile; direct quotes from report pages 8-9.",
+    "evidence_basis": "empirical",
+    "relevant_policy_or_law": "Personal Data Protection Proclamation No. 1321/2024 (later law)",
+    "keywords": "data protection, Ethiopia, UNECA, legal framework",
+    "notes": "Real corpus record. Text extracted from acquired PDF (source_id=10); locators pages 8-9.",
+    "locator_type": "page",
+    "locator_value": "8-9",
+    "data_status": "real"
+  }
+]

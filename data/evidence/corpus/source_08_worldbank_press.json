@@ -1,0 +1,27 @@
+[
+  {
+    "title": "World Bank: US$350M financing for Fayda targeting 90 million registrants",
+    "source_type": "institutional_report",
+    "publisher_or_author": "World Bank Group",
+    "publication_date": "2023-12-13",
+    "country_or_jurisdiction": "Ethiopia",
+    "institution": "World Bank Group",
+    "domain_theme": "digital_identity",
+    "claim": "The World Bank approved US$350 million in support for Ethiopia's Fayda digital ID project targeting at least 90 million registrants, reporting that Fayda was established through the Digital ID Proclamation passed in March 2023 and that more than 3.5 million people had registered in Fayda pilots.",
+    "evidence_summary": "A World Bank press release (13 December 2023) announces the approval of the Digital ID for Inclusion and Services Project, noting at least 90 million Ethiopians plus refugees and migrants would have access to an inclusive ID, that the new ID system (Fayda) was established through the Digital ID Proclamation passed in March 2023, and that more than 3.5 million people had registered in Fayda pilots.",
+    "source_excerpt": "At least 90 million Ethiopians, as well as refugees and migrants living in Ethiopia, will have access to an inclusive and secure ID... The new ID system, which was established through the Digital ID Proclamation that was passed in March 2023, is known as Fayda... More than 3.5 million people have registered in Fayda pilots to date.",
+    "interpretation": "Institutional evidence (financier's account) of the scale and status of Fayda rollout and of the financing supporting it. Evidence of stated project targets and pilot registration numbers; not an independent audit of enrollment.",
+    "source_url": "https://www.worldbank.org/en/news/press-release/2023/12/13/world-bank-supports-afe-ethiopias-digital-id-project-to-increase-access-to-services-and-economic-opportunities",
+    "citation": "World Bank, 'Digital ID for Inclusion and Services Project' press release, 13 December 2023.",
+    "reliability_level": 4,
+    "evidence_strength": 4,
+    "methodology_or_basis": "Direct quote from the World Bank press release announcing the approved project.",
+    "evidence_basis": "institutional",
+    "relevant_policy_or_law": "Ethiopian Digital Identification Proclamation No. 1284/2023 (as referenced)",
+    "keywords": "Fayda, digital ID, World Bank, financing, Ethiopia",
+    "notes": "Real corpus record. Text extracted from acquired HTML (data/raw/8/...).",
+    "locator_type": "paragraph",
+    "locator_value": "body, paragraph 1",
+    "data_status": "real"
+  }
+]
