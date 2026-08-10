@@ -102,3 +102,59 @@ Comparisons never blend real and synthetic data invisibly. Every observation and
 evidence record carries `data_status` (`real | synthetic | methodological`), and
 the output exposes it so a researcher can separate demonstration fixtures from
 real findings.
+
+## Comparative governance analysis (Step 7)
+
+`src/governance/comparison.py` extends the pairwise comparison into a
+reproducible, multi-case analysis across the same 12 dimensions.
+
+```bash
+python -m src.cli comparative                      # all available cases
+python -m src.cli comparative --cases Ethiopia,Kenya,EU --format json
+python -m src.cli comparative --cases Ethiopia,Kenya --format csv
+python -m src.cli comparative --validate           # schema-check before printing
+```
+
+Cases are any jurisdiction with at least one real evidence record or real
+observation (e.g. Ethiopia, Kenya, European Union in the current corpus).
+Output is deterministic: cases are sorted, dimensions keep the fixed order, and
+comparison notes are sorted.
+
+### Explicit categories
+
+Every `(case, dimension)` cell distinguishes five things:
+
+| category | field | meaning |
+|---|---|---|
+| supported evidence | `evidence_status` | `supported` (>=2 evidence, >=2 sources) or `partial` (>=1) |
+| missing evidence | `evidence_status` | `missing_evidence` when the cell has no real evidence |
+| conflicting evidence | `evidence_status` / `conflicts` | `conflicting` when linked evidence carries a `contradicts` relation; the pairs are listed |
+| analytical interpretation | `interpretation` / `analytical_notes` | the assessment text from linked governance observations |
+| research gaps | `gaps` | structured gap note for the cell |
+
+### Evidence traceability
+
+Each cell's `evidence` list is fully traceable to the underlying provenance:
+`evidence_id`, `source_id`, `source_title`, `source_type`, `locator_type` /
+`locator_value`, `claim`, `evidence_basis`, `data_status`, `citation` and
+`source_url`. Nothing in the report is invented: every claim, assessment and gap
+originates from committed evidence, observations or the defined status rules.
+
+### Interpretation limits
+
+- The report is **not a ranking** and never assigns scores.
+- `missing_evidence` is a statement about the corpus, not a negative assessment.
+- `conflicting` means the corpus contains recorded contradictions; the report
+  lists them rather than silently resolving them.
+- Pairwise `comparison_notes` reuse the Step 6 baseline heuristic, which
+  classifies patterns from evidence *confidence*. Read the `interpretation`
+  text alongside each note; the note is methodological, not substantive.
+- Evidence basis (`normative`, `institutional`, `implementation`, ...) is
+  reported per record; a law-on-paper record is never presented as evidence of
+  enforcement.
+
+### Schema and integrity
+
+`validate_report()` checks the report against a pydantic schema: exactly the 12
+dimensions, valid `evidence_status` values, and case keys that match the
+report's case set. The CLI `--validate` flag runs this check before printing.

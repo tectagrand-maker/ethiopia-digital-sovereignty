@@ -79,3 +79,21 @@ sources, not additional statute text.
 - `governance.dimensions_with_missing_evidence`
 - `gaps.sources_without_evidence`
 - `gaps.unresolved_contradictions`
+
+## Comparator gaps (Step 7)
+
+The comparative layer (`python -m src.cli comparative`) surfaces the same
+corpus-level gaps per case. In the current corpus:
+
+- **Kenya** has 4 evidence records (consent, rights, ODPC, cross-border
+  transfer) — every other dimension cell is `missing_evidence`.
+- **European Union (GDPR)** has 2 evidence records (consent definition,
+  supervisory authorities) — likewise mostly `missing_evidence`.
+- Because most comparator cells are empty, the pairwise comparison notes
+  default to `insufficient_evidence` or `not_comparable` for those dimensions;
+  this is an accurate reflection of the corpus, not a finding about those
+  jurisdictions.
+
+Closing these gaps requires acquiring and extracting comparator sources for
+the missing dimensions (for example Kenya's digital identity and cybersecurity
+frameworks, and GDPR data-localization/transfer provisions beyond s.48).

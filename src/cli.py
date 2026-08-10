@@ -21,6 +21,9 @@ from src.governance.status import research_status_report, report_to_json
 from src.governance.matrix import (
     coverage_matrix, research_matrix, matrix_to_csv,
 )
+from src.governance.comparison import (
+    comparative_analysis, analysis_to_json, analysis_to_csv, validate_report,
+)
 
 
 def _source_row(s):
@@ -153,6 +156,21 @@ def main(argv=None):
     rel_parser.add_argument("--notes", default=None)
     rel_parser.add_argument("--list", action="store_true", help="List relations for --evidence-a")
 
+    # ---- comparative ----
+    comp_parser = subparsers.add_parser(
+        "comparative",
+        help="Comparative governance analysis (multi-case, fully traceable)",
+    )
+    comp_parser.add_argument(
+        "--cases", default="",
+        help="Comma-separated jurisdictions (default: all available cases)",
+    )
+    comp_parser.add_argument("--format", choices=["json", "csv"], default="json")
+    comp_parser.add_argument(
+        "--validate", action="store_true",
+        help="Validate the report against the output schema before printing",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "init":
@@ -262,6 +280,15 @@ def main(argv=None):
             except ValueError as e:
                 print(f"Error: {e}")
                 sys.exit(1)
+    elif args.command == "comparative":
+        cases = [c.strip() for c in args.cases.split(",") if c.strip()] or None
+        report = comparative_analysis(cases)
+        if args.validate:
+            validate_report(report)
+        if args.format == "json":
+            print(analysis_to_json(report))
+        else:
+            print(analysis_to_csv(report))
     else:
         parser.print_help()
 

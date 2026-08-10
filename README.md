@@ -169,6 +169,20 @@ python -m src.cli compare --j1 Ethiopia --j2 Kenya --format csv
 Dimensions without observations are reported as `missing_evidence` — never as a
 negative score.
 
+## Comparative governance analysis (Step 7)
+
+```bash
+python -m src.cli comparative                              # all available cases
+python -m src.cli comparative --cases Ethiopia,Kenya --format json
+python -m src.cli comparative --cases Ethiopia,Kenya --format csv
+python -m src.cli comparative --validate                   # schema-check before printing
+```
+
+Multi-case analysis across the 12 dimensions where each cell explicitly
+distinguishes supported evidence, missing evidence, conflicting evidence,
+analytical interpretation and research gaps. Every cell's evidence list is
+traceable to source, locator and citation. Never a ranking or a score.
+
 ## Research status
 
 ```bash
@@ -212,7 +226,8 @@ Files under `data/examples/` and the synthetic records created in tests are
 - `docs/architecture.md` — the evidence → governance → comparison pipeline
 - `docs/evidence-methodology.md` — source vs evidence vs claim vs interpretation
 - `docs/source-collection.md` — source registry, acquisition, provenance, integrity
-- `docs/comparative-analysis.md` — dimensions, observations, missing evidence
+- `docs/comparative-analysis.md` — dimensions, observations, missing evidence,
+  and the Step 7 comparative governance analysis
 - `docs/evidence-matrix.md` — Step 6 matrix, status derivation, evidence basis
 - `docs/research-gaps.md` — current corpus gaps and priorities
 
@@ -222,8 +237,11 @@ Files under `data/examples/` and the synthetic records created in tests are
 - PDF text extraction is `pypdf`-based and does not handle image-only PDFs (no OCR).
 - Ethiopia governance observations cover 9 of 12 dimensions; `transparency`,
   `interoperability` and `private_sector_dependence` remain `missing_evidence`.
-- The comparative baseline classifies patterns from confidence and must be read
-  together with the assessment text (see `docs/evidence-matrix.md`).
+- The comparative baseline and the Step 7 pairwise notes classify patterns from
+  confidence and must be read together with the interpretation text (see
+  `docs/evidence-matrix.md` and `docs/comparative-analysis.md`).
+- Kenya and the EU are represented by narrow evidence bases (4 and 2 records),
+  so most of their dimension cells are `missing_evidence`.
 - No frontend/UI yet.
 
 ## What comes next
