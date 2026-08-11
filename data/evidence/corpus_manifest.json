@@ -8,5 +8,10 @@
   {"file": "corpus/source_09_id4d_fayda.json", "source_id": 9},
   {"file": "corpus/source_10_uneca.json", "source_id": 10},
   {"file": "corpus/source_12_kenya_dpa.json", "source_id": 12},
-  {"file": "corpus/source_13_gdpr.json", "source_id": 13}
+  {"file": "corpus/source_13_gdpr.json", "source_id": 13},
+  {"file": "corpus/source_05_step10.json", "source_id": 5},
+  {"file": "corpus/source_09_step10.json", "source_id": 9},
+  {"file": "corpus/source_10_step10.json", "source_id": 10},
+  {"file": "corpus/source_13_step10.json", "source_id": 13},
+  {"file": "corpus/source_17_freedom_info_590.json", "source_id": 17}
 ]

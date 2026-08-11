@@ -1,0 +1,27 @@
+[
+  {
+    "title": "World Bank ID4D: NIDP runs community information campaigns before mobile registration to build trust in Fayda",
+    "source_type": "institutional_report",
+    "publisher_or_author": "World Bank Group / ID4D",
+    "publication_date": "2024-03-07",
+    "country_or_jurisdiction": "Ethiopia",
+    "institution": "World Bank Group",
+    "domain_theme": "digital_identity",
+    "claim": "The World Bank ID4D study reports that the National ID Program (NIDP) of Ethiopia develops context-specific community information campaigns, run well before mobile registration activities, to address community concerns, build trust and preemptively resolve potential issues around the Fayda ID rollout.",
+    "evidence_summary": "The ID4D study on end-user perspectives on Fayda ID reports that the NIDP establishes context-specific community information campaigns tailored to the community context to ensure proactive engagement with diverse local leaders well before the initiation of (mobile) registration activities, with this preparatory phase conducted days or weeks in advance to address community concerns, build trust and preemptively resolve potential issues.",
+    "source_excerpt": "Develop context-specific community information campaigns. Establish information campaigns tailored to the community context to ensure proactive engagement with diverse local leaders well before the initiation of (mobile) registration activities. This preparatory phase, conducted days or weeks in advance, will aim to address community concerns, build trust, and preemptively resolve potential issues.",
+    "interpretation": "Institutional-report evidence describing the NIDP's public-information/communication practice around the Fayda registration rollout, including proactive engagement with local leaders. Describes programme design/practice; it does not measure the campaigns' reach or effectiveness.",
+    "source_url": "https://documents1.worldbank.org/curated/en/099030824142042717/pdf/P176629109fd9d0d41a1641562c9dc749cc.pdf",
+    "citation": "World Bank ID4D, 'End-user perspectives on Fayda ID from marginalized and vulnerable groups' (2024), p.21.",
+    "reliability_level": 4,
+    "evidence_strength": 4,
+    "methodology_or_basis": "Direct quote from the ID4D study. The study is based on key informant interviews and focus group discussions with end users; the passage describes NIDP communication practice.",
+    "evidence_basis": "implementation",
+    "relevant_policy_or_law": "Ethiopian Digital Identification Proclamation No. 1284/2023 (Fayda ID)",
+    "keywords": "Fayda, digital ID, community information, transparency, Ethiopia",
+    "notes": "Real corpus record. Text extracted from acquired PDF (data/raw/9/P176629109fd9d0d41a1641562c9dc749cc.pdf).",
+    "locator_type": "page",
+    "locator_value": "p.21",
+    "data_status": "real"
+  }
+]

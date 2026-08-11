@@ -238,5 +238,22 @@
     "research_priority": "low",
     "jurisdiction_group": "international",
     "research_domains": "digital_identity,data_governance,privacy,consent,institutional_accountability,interoperability"
+  },
+  {
+    "title": "Freedom of the Mass Media and Access to Information Proclamation No. 590/2008",
+    "source_type": "law",
+    "publisher_or_author": "Federal Democratic Republic of Ethiopia",
+    "publication_date": "2008-12-04",
+    "jurisdiction": "Ethiopia",
+    "institution": "House of Peoples' Representatives",
+    "url": "https://justice.gov.et/en/law/a-proclamation-to-provide-for-freedom-of-the-mass-media-and-access-to-information/",
+    "language": "en",
+    "description": "Establishes the right of access to information held by public bodies (Art. 12) and a duty on public bodies to publish information about their structure, decisions and policies (Art. 13). Adopted 4 December 2008; published Federal Negarit Gazeta 14th Year No. 64.",
+    "status": "discovered",
+    "research_priority": "high",
+    "jurisdiction_group": "ethiopia",
+    "research_domains": "citizen_rights,data_governance,privacy",
+    "access_date": "2026-08-11",
+    "notes": "Registered for Step 10 targeted acquisition. Text inspected via the official Ministry of Justice law page and an official-copy scan of the proclamation text; raw file not downloaded into the repository per the source-acquisition policy."
   }
 ]

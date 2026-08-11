@@ -180,5 +180,61 @@
       "data_status": "real"
     },
     "evidence_ids": [23]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "Freedom of the Mass Media and Access to Information Proclamation 590/2008; UNECA country profile; World Bank ID4D",
+      "dimension": "transparency",
+      "indicator": "Statutory and reported transparency of government information and digital governance",
+      "observed_evidence": "Proclamation 590/2008 establishes a right of access to information held by public bodies and a statutory duty to publish (Arts. 12-13). UNECA reports that it is common for the government to openly block social media or shut down telecom/internet services, with a nationwide internet shutdown in July 2020 and blackouts in Tigray since November 2022. The World Bank ID4D study reports the NIDP runs community information campaigns before mobile registration to build trust in Fayda.",
+      "assessment": "Ethiopia has a statutory transparency framework (right of access to information, duty to publish) on paper, while reporting evidence documents practices - open social media blocking and internet shutdowns without a clearly defined legal basis - pointing to a gap between the legal framework and reported practice.",
+      "confidence": 3,
+      "analytical_notes": "ev33 is normative (the statute); ev29 is institutional-report evidence of reported practice; ev28 is implementation evidence on the NIDP's information campaigns. The observation records the legal standard and reported practice; it does not independently measure transparency outcomes.",
+      "data_status": "real"
+    },
+    "evidence_ids": [33, 29, 28]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "Digital Ethiopia 2025 strategy; UNECA country profile",
+      "dimension": "interoperability",
+      "indicator": "Interoperability of digital payments and interconnection of telecommunications infrastructure",
+      "observed_evidence": "The Digital Ethiopia 2025 strategy states that online payments are restricted due to lack of interoperability among banks and financial services, that financial interoperability is nascent and mobile wallets also lack interoperability. UNECA reports that interconnection between telecom providers is regulated under Communication Services Proclamation 1148/2019 (Arts. 42-43) and Interconnection Directive 791/2021, allowing users of one supplier to communicate with users of other suppliers.",
+      "assessment": "Interoperability is legally regulated for telecommunications interconnection, while financial-service interoperability is documented by the government's own strategy as nascent and a barrier to digital payments.",
+      "confidence": 3,
+      "analytical_notes": "ev26 is policy/self-report evidence on financial interoperability; ev31 is institutional evidence describing the interconnection regulatory regime. Different facets of interoperability (payments vs network interconnection) from different evidence bases.",
+      "data_status": "real"
+    },
+    "evidence_ids": [26, 31]
+  },
+  {
+    "observation": {
+      "jurisdiction": "Ethiopia",
+      "system_name": "PDP 1321/2024; UNECA country profile; Digital Ethiopia 2025 strategy",
+      "dimension": "data_localization",
+      "indicator": "Territorial storage mandate and its operational context",
+      "observed_evidence": "PDP 1321/2024 Art. 22 imposes a territorial storage mandate with state-designated critical data and a prior-approval cross-border transfer regime. UNECA documents that before 2024 no legislation regulated cross-border data flows, so data could be transferred abroad without any legal requirement. The Digital Ethiopia 2025 strategy records no regulation of data centres and poorly managed in-house data centres.",
+      "assessment": "The 2024 law establishes an explicit data-localization mandate; UNECA documents the pre-2024 absence of any cross-border data flow regulation; the strategy evidences weak data-centre governance. The records are temporally sequenced (pre-2024 state vs 2024 law) rather than contradictory.",
+      "confidence": 3,
+      "analytical_notes": "ev2 is normative (the statutory mandate); ev30 is time-limited empirical evidence of the earlier legal state; ev27 is policy/self-report evidence on data-centre governance. Together they frame the localization regime and its context.",
+      "data_status": "real"
+    },
+    "evidence_ids": [2, 30, 27]
+  },
+  {
+    "observation": {
+      "jurisdiction": "European Union",
+      "system_name": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+      "dimension": "data_localization",
+      "indicator": "Territorial data-storage mandate for intra-Union personal data",
+      "observed_evidence": "Article 1(3) GDPR provides that the free movement of personal data within the Union shall be neither restricted nor prohibited for reasons connected with the protection of natural persons with regard to the processing of personal data.",
+      "assessment": "The EU legal framework prohibits data-protection-based restrictions on the free movement of personal data within the Union, i.e. it does not impose territorial data-localization mandates for intra-Union transfers. This is the EU comparator position for Ethiopia's Art. 22 mandate.",
+      "confidence": 5,
+      "analytical_notes": "Direct statutory text (Art. 1(3)). Establishes the EU legal rule on intra-Union free movement of personal data; cross-border transfer to third countries is separately governed by Chapter V.",
+      "data_status": "real"
+    },
+    "evidence_ids": [32]
   }
 ]
