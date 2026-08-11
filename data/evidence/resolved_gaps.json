@@ -1,0 +1,42 @@
+[
+  {
+    "gap_id": "ETHIOPIA-transparency-evidence_coverage",
+    "category": "evidence_coverage",
+    "jurisdiction": "Ethiopia",
+    "dimension": "transparency",
+    "resolving_evidence_ids": [28, 29, 33],
+    "resolution_note": "Closed by the Step 10 evidence round: evidence 28 (ID4D community information campaigns), 29 (UNECA reported internet/telecom shutdowns) and 33 (Proclamation 590/2008 access-to-information rights) moved the cell from missing_evidence to supported."
+  },
+  {
+    "gap_id": "ETHIOPIA-interoperability-evidence_coverage",
+    "category": "evidence_coverage",
+    "jurisdiction": "Ethiopia",
+    "dimension": "interoperability",
+    "resolving_evidence_ids": [26, 31],
+    "resolution_note": "Closed by the Step 10 evidence round: evidence 26 (Digital Ethiopia 2025 online payments) and 31 (UNECA interconnection between telecom providers) moved the cell from missing_evidence to supported."
+  },
+  {
+    "gap_id": "ETHIOPIA-data_localization-source_diversity",
+    "category": "source_diversity",
+    "jurisdiction": "Ethiopia",
+    "dimension": "data_localization",
+    "resolving_evidence_ids": [27, 30],
+    "resolution_note": "Closed by the Step 10 evidence round: evidence 27 (Digital Ethiopia 2025, no data-centre regulation) and 30 (UNECA, pre-2024 cross-border flow state) added two independent sources beyond the single-source basis, moving the cell from partial to supported."
+  },
+  {
+    "gap_id": "ETHIOPIA-data_localization-methodological_limitation",
+    "category": "methodological_limitation",
+    "jurisdiction": "Ethiopia",
+    "dimension": "data_localization",
+    "resolving_evidence_ids": [27, 30],
+    "resolution_note": "Closed by the Step 10 evidence round: evidence 27 (observational) and 30 (empirical) added non-normative bases alongside the statutory text, so the cell is no longer covered only by normative/institutional records."
+  },
+  {
+    "gap_id": "EUROPEAN_UNION-data_localization-evidence_coverage",
+    "category": "evidence_coverage",
+    "jurisdiction": "European Union",
+    "dimension": "data_localization",
+    "resolving_evidence_ids": [32],
+    "resolution_note": "Closed by the Step 10 evidence round: evidence 32 (GDPR Article 1(3) free movement of personal data) moved the comparator cell from missing_evidence to partial, enabling a first evidence-based cross-case reading."
+  }
+]

@@ -30,6 +30,10 @@ from src.governance.casestudy import (
 from src.governance.research_gaps import (
     research_plan, validate_plan, plan_to_json, plan_to_markdown,
 )
+from src.governance.findings import (
+    build_findings_report, validate_findings,
+    findings_to_json, findings_to_markdown,
+)
 
 
 def _source_row(s):
@@ -220,6 +224,28 @@ def main(argv=None):
         help="Validate the plan against the output schema and database before printing",
     )
 
+    # ---- findings ----
+    findings_parser = subparsers.add_parser(
+        "findings",
+        help="Evidence Re-analysis & Research Findings Synthesis (Step 11)",
+    )
+    findings_parser.add_argument(
+        "--case", default=None,
+        help="Filter findings to a jurisdiction (default: all cases)",
+    )
+    findings_parser.add_argument(
+        "--dimension", default=None,
+        help="Filter findings to one of the 12 governance dimensions",
+    )
+    findings_parser.add_argument(
+        "--format", choices=["json", "markdown"], default="json",
+        help="Output format",
+    )
+    findings_parser.add_argument(
+        "--validate", action="store_true",
+        help="Validate the report against the output schema and database before printing",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "init":
@@ -362,6 +388,18 @@ def main(argv=None):
             else:
                 print(plan_to_markdown(plan))
         except ValueError as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+    elif args.command == "findings":
+        try:
+            report = build_findings_report(case=args.case, dimension=args.dimension)
+            if args.validate:
+                validate_findings(report)
+            if args.format == "json":
+                print(findings_to_json(report))
+            else:
+                print(findings_to_markdown(report))
+        except (ValueError, KeyError) as e:
             print(f"Error: {e}")
             sys.exit(1)
     else:

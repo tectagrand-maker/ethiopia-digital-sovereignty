@@ -18,6 +18,12 @@ EVIDENCE              src/evidence/models.py, src/evidence/ingestion.py
 GOVERNANCE OBSERVATION  src/governance/analysis.py
       ↓
 COMPARISON            JSON / CSV
+      ↓
+CASE-STUDY DOSSIER    src/governance/casestudy.py  (Step 8)
+      ↓
+RESEARCH GAPS         src/governance/research_gaps.py  (Step 9)
+      ↓
+FINDINGS SYNTHESIS    src/governance/findings.py  (Step 11)
 ```
 
 ## Components
@@ -45,6 +51,11 @@ COMPARISON            JSON / CSV
   across 12 dimensions, JSON and CSV output. Missing evidence is reported as
   `missing_evidence`, never as a score.
 - `status.py` — `research_status_report()` research-coverage report.
+- `findings.py` — Step 11 evidence findings synthesis: deterministic,
+  schema-validated report built only from the committed database (per-cell
+  findings, comparative findings, cross-dimension patterns, Ethiopia primary
+  synthesis, resolved/remaining research gaps). See
+  `docs/findings-synthesis.md`.
 
 ### src/cli.py
 

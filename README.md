@@ -17,6 +17,7 @@ This is a **research infrastructure** repository. It currently contains:
 - Executable comparative analysis (JSON / CSV)
 - An evidence-backed case-study dossier framework (JSON / Markdown)
 - A research-gap prioritization and evidence-expansion framework
+- A deterministic evidence-findings synthesis layer (Step 11)
 - A research-coverage status report
 - A small **real** source catalog + a small **real** evidence corpus
 - Synthetic demonstration fixtures, clearly labelled
@@ -225,6 +226,23 @@ Evidence expansion always flows through the ingestion/provenance pipeline
 (`evidence_expansion_requirements()` / `validate_evidence_record()`). See
 `docs/research-gap-framework.md`.
 
+## Evidence findings synthesis (Step 11)
+
+```bash
+python -m src.cli findings                          # full synthesis report (JSON)
+python -m src.cli findings --validate               # schema + database integrity check
+python -m src.cli findings --case Ethiopia          # primary-case focused report
+python -m src.cli findings --dimension data_localization --format markdown
+```
+
+Re-analyzes the committed evidence corpus into a deterministic, evidence-backed
+findings layer: per-cell findings (supported / partial / conflicting /
+evidence_limitation), comparative findings only where both sides hold evidence,
+cross-dimension (non-causal) patterns, and the Ethiopia primary-case synthesis.
+`missing_evidence` is a corpus statement, never a negative finding; no scores,
+indices or rankings are produced. The report is a pure function of the database
+(identical state -> identical JSON). See `docs/findings-synthesis.md`.
+
 ## Research status
 
 ```bash
@@ -277,18 +295,24 @@ Files under `data/examples/` and the synthetic records created in tests are
   research actions, how to add evidence)
 - `docs/evidence-matrix.md` — Step 6 matrix, status derivation, evidence basis
 - `docs/research-gaps.md` — current corpus gaps and priorities
+- `docs/findings-synthesis.md` — the Step 11 evidence findings synthesis layer
+  (schemas, confidence rule, comparative rule, cross-dimension patterns,
+  resolved-gap closure record, report validation)
 
 ## Current limitations
 
 - Only a subset of catalog sources have been acquired and extracted so far.
 - PDF text extraction is `pypdf`-based and does not handle image-only PDFs (no OCR).
-- Ethiopia governance observations cover 9 of 12 dimensions; `transparency`,
-  `interoperability` and `private_sector_dependence` remain `missing_evidence`.
+- Ethiopia governance observations cover 11 of 12 dimensions; Step 10 raised
+  `transparency` and `interoperability` to `supported`, while
+  `private_sector_dependence` remains `missing_evidence` for Ethiopia.
 - The comparative baseline and the Step 7 pairwise notes classify patterns from
   confidence and must be read together with the interpretation text (see
   `docs/evidence-matrix.md` and `docs/comparative-analysis.md`).
-- Kenya and the EU are represented by narrow evidence bases (4 and 2 records),
-  so most of their dimension cells are `missing_evidence`.
+- Kenya and the EU are represented by narrow evidence bases, so most of their
+  dimension cells are `missing_evidence`; the Step 11 report records this as
+  explicit `evidence_limitation` / comparative-coverage findings, never as a
+  negative assessment.
 - No frontend/UI yet.
 
 ## What comes next
@@ -296,5 +320,6 @@ Files under `data/examples/` and the synthetic records created in tests are
 - Executing the prioritized research actions from `research-gaps` and closing
   the `high`-priority gaps through the standard ingestion pipeline.
 - Writing the final case-study narrative on top of the dossier framework
-  (`docs/case-study-framework.md`), keeping every statement traceable to an
+  (`docs/case-study-framework.md`) and the Step 11 findings layer
+  (`docs/findings-synthesis.md`), keeping every statement traceable to an
   evidence id.
