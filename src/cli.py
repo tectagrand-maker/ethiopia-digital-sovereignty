@@ -34,6 +34,10 @@ from src.governance.findings import (
     build_findings_report, validate_findings,
     findings_to_json, findings_to_markdown,
 )
+from src.governance.narrative import (
+    case_study_narrative, validate_narrative,
+    narrative_to_json, narrative_to_markdown,
+)
 
 
 def _source_row(s):
@@ -246,6 +250,28 @@ def main(argv=None):
         help="Validate the report against the output schema and database before printing",
     )
 
+    # ---- case-narrative ----
+    narrative_parser = subparsers.add_parser(
+        "case-narrative",
+        help="Evidence-traceable case-study narrative draft (Step 12)",
+    )
+    narrative_parser.add_argument(
+        "--case", required=True,
+        help="Jurisdiction to build the narrative for (e.g. Ethiopia)",
+    )
+    narrative_parser.add_argument(
+        "--comparators", default="",
+        help="Comma-separated comparators (default: all other available cases)",
+    )
+    narrative_parser.add_argument(
+        "--format", choices=["json", "markdown"], default="json",
+        help="Output format",
+    )
+    narrative_parser.add_argument(
+        "--validate", action="store_true",
+        help="Validate the narrative against the output schema and database before printing",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "init":
@@ -399,6 +425,19 @@ def main(argv=None):
                 print(findings_to_json(report))
             else:
                 print(findings_to_markdown(report))
+        except (ValueError, KeyError) as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+    elif args.command == "case-narrative":
+        comparators = [c.strip() for c in args.comparators.split(",") if c.strip()] or None
+        try:
+            narrative = case_study_narrative(args.case, comparators)
+            if args.validate:
+                validate_narrative(narrative)
+            if args.format == "json":
+                print(narrative_to_json(narrative))
+            else:
+                print(narrative_to_markdown(narrative))
         except (ValueError, KeyError) as e:
             print(f"Error: {e}")
             sys.exit(1)

@@ -18,6 +18,7 @@ This is a **research infrastructure** repository. It currently contains:
 - An evidence-backed case-study dossier framework (JSON / Markdown)
 - A research-gap prioritization and evidence-expansion framework
 - A deterministic evidence-findings synthesis layer (Step 11)
+- A deterministic evidence-traceable case-study narrative layer (Step 12)
 - A research-coverage status report
 - A small **real** source catalog + a small **real** evidence corpus
 - Synthetic demonstration fixtures, clearly labelled
@@ -48,6 +49,10 @@ COMPARATIVE ANALYSIS
 CASE-STUDY DOSSIER
       ↓
 RESEARCH-GAP PRIORITIZATION
+      ↓
+EVIDENCE FINDINGS SYNTHESIS
+      ↓
+CASE-STUDY NARRATIVE
 ```
 
 ## Installation
@@ -243,6 +248,24 @@ cross-dimension (non-causal) patterns, and the Ethiopia primary-case synthesis.
 indices or rankings are produced. The report is a pure function of the database
 (identical state -> identical JSON). See `docs/findings-synthesis.md`.
 
+## Case-study narrative (Step 12)
+
+```bash
+python -m src.cli case-narrative --case Ethiopia --validate --format json   # validated draft (JSON)
+python -m src.cli case-narrative --case Ethiopia --format markdown          # prose draft w/ inline [ev] citations
+python -m src.cli case-narrative --case Ethiopia --comparators Kenya        # explicit comparator set
+```
+
+Builds a deterministic, evidence-traceable **narrative draft** on top of the
+Step 8 dossier, the Step 11 findings and the Step 9 gaps. Every claim carries
+`statement_origin` (`evidence_derived | analytical_interpretation |
+corpus_limitation`) and its evidence ids; claims without evidence are explicit
+corpus limitations, never verdicts. The output includes a traceability manifest
+mapping every evidence id to the sections that cite it, and is validated against
+the pydantic schema and the committed database (`--validate`). It is draft
+material for the final writing phase, never a score or ranking. See
+`docs/case-narrative.md`.
+
 ## Research status
 
 ```bash
@@ -298,6 +321,8 @@ Files under `data/examples/` and the synthetic records created in tests are
 - `docs/findings-synthesis.md` — the Step 11 evidence findings synthesis layer
   (schemas, confidence rule, comparative rule, cross-dimension patterns,
   resolved-gap closure record, report validation)
+- `docs/case-narrative.md` — the Step 12 evidence-traceable case-study narrative
+  layer (claim model, traceability manifest, validation, writing workflow)
 
 ## Current limitations
 
@@ -313,13 +338,18 @@ Files under `data/examples/` and the synthetic records created in tests are
   dimension cells are `missing_evidence`; the Step 11 report records this as
   explicit `evidence_limitation` / comparative-coverage findings, never as a
   negative assessment.
+- The Step 12 narrative is draft material: prose sentences are deterministic
+  renderings of evidence claims, interpretations and limitation statements. The
+  final academic prose still needs human writing; the traceability manifest keeps
+  every sentence anchored while that happens.
 - No frontend/UI yet.
 
 ## What comes next
 
 - Executing the prioritized research actions from `research-gaps` and closing
   the `high`-priority gaps through the standard ingestion pipeline.
-- Writing the final case-study narrative on top of the dossier framework
+- Writing the final case-study narrative on top of the Step 12 narrative draft
+  (`docs/case-narrative.md`), the dossier framework
   (`docs/case-study-framework.md`) and the Step 11 findings layer
   (`docs/findings-synthesis.md`), keeping every statement traceable to an
   evidence id.
