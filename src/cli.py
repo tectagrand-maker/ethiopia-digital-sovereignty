@@ -24,6 +24,9 @@ from src.governance.matrix import (
 from src.governance.comparison import (
     comparative_analysis, analysis_to_json, analysis_to_csv, validate_report,
 )
+from src.governance.casestudy import (
+    case_study_dossier, validate_dossier, dossier_to_json, dossier_to_markdown,
+)
 
 
 def _source_row(s):
@@ -171,6 +174,25 @@ def main(argv=None):
         help="Validate the report against the output schema before printing",
     )
 
+    # ---- case-study ----
+    case_parser = subparsers.add_parser(
+        "case-study",
+        help="Evidence-backed case-study dossier for a jurisdiction (Step 8)",
+    )
+    case_parser.add_argument(
+        "--case", required=True,
+        help="Jurisdiction to build the dossier for (e.g. Ethiopia)",
+    )
+    case_parser.add_argument(
+        "--comparators", default="",
+        help="Comma-separated comparators (default: all other available cases)",
+    )
+    case_parser.add_argument("--format", choices=["json", "markdown"], default="json")
+    case_parser.add_argument(
+        "--validate", action="store_true",
+        help="Validate the dossier against the output schema and database before printing",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "init":
@@ -289,6 +311,19 @@ def main(argv=None):
             print(analysis_to_json(report))
         else:
             print(analysis_to_csv(report))
+    elif args.command == "case-study":
+        comparators = [c.strip() for c in args.comparators.split(",") if c.strip()] or None
+        try:
+            dossier = case_study_dossier(args.case, comparators)
+            if args.validate:
+                validate_dossier(dossier)
+            if args.format == "json":
+                print(dossier_to_json(dossier))
+            else:
+                print(dossier_to_markdown(dossier))
+        except (ValueError, KeyError) as e:
+            print(f"Error: {e}")
+            sys.exit(1)
     else:
         parser.print_help()
 

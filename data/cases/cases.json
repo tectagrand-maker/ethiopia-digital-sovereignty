@@ -1,0 +1,17 @@
+[
+  {
+    "jurisdiction": "Ethiopia",
+    "title": "Ethiopia",
+    "description": "Ethiopia's digital governance landscape, centered on the Personal Data Protection Proclamation No. 1321/2024, the Digital Identification Proclamation No. 1284/2023 (Fayda), the Computer Crime Proclamation No. 958/2016, the Electronic Transactions Proclamation No. 1205/2020, and the Digital Ethiopia 2025 strategy."
+  },
+  {
+    "jurisdiction": "Kenya",
+    "title": "Kenya",
+    "description": "Kenya's data governance framework as set out in the Data Protection Act, 2019 (No. 24 of 2019), including the statutory consent definition, data subject rights, the Office of the Data Protection Commissioner, and cross-border transfer rules."
+  },
+  {
+    "jurisdiction": "European Union",
+    "title": "European Union",
+    "description": "The European Union's data protection framework under the General Data Protection Regulation (EU) 2016/679, including the definition of consent and the independent supervisory authority architecture."
+  }
+]

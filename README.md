@@ -15,6 +15,7 @@ This is a **research infrastructure** repository. It currently contains:
 - A researcher-driven evidence model (excerpt, claim, summary, interpretation)
 - Governance observations linked to evidence (12 dimensions)
 - Executable comparative analysis (JSON / CSV)
+- An evidence-backed case-study dossier framework (JSON / Markdown)
 - A research-coverage status report
 - A small **real** source catalog + a small **real** evidence corpus
 - Synthetic demonstration fixtures, clearly labelled
@@ -41,6 +42,8 @@ EVIDENCE EXTRACTION (researcher-entered)
 GOVERNANCE OBSERVATION
       ↓
 COMPARATIVE ANALYSIS
+      ↓
+CASE-STUDY DOSSIER
 ```
 
 ## Installation
@@ -183,6 +186,23 @@ distinguishes supported evidence, missing evidence, conflicting evidence,
 analytical interpretation and research gaps. Every cell's evidence list is
 traceable to source, locator and citation. Never a ranking or a score.
 
+## Case-study framework (Step 8)
+
+```bash
+python -m src.cli case-study --case Ethiopia --validate --format json   # validated dossier
+python -m src.cli case-study --case Kenya --format markdown             # narrative-ready rendering
+python -m src.cli case-study --case Ethiopia --comparators Kenya,European\ Union
+```
+
+Builds a deterministic, evidence-backed dossier for one jurisdiction: case
+identity, one profile for each of the 12 governance dimensions, a synthesis of
+supported/partial/conflicting/missing evidence, and a comparative-context block
+that references the Step 7 baseline. Every claim stays traceable to an evidence
+id; the dossier is validated against a pydantic schema and the database
+(`--validate`). It is the structured layer from which narrative case-study
+writing is generated, never a score or ranking. See
+`docs/case-study-framework.md`.
+
 ## Research status
 
 ```bash
@@ -228,6 +248,8 @@ Files under `data/examples/` and the synthetic records created in tests are
 - `docs/source-collection.md` — source registry, acquisition, provenance, integrity
 - `docs/comparative-analysis.md` — dimensions, observations, missing evidence,
   and the Step 7 comparative governance analysis
+- `docs/case-study-framework.md` — the Step 8 evidence-backed case-study dossier
+  framework (data model, validation, narrative workflow)
 - `docs/evidence-matrix.md` — Step 6 matrix, status derivation, evidence basis
 - `docs/research-gaps.md` — current corpus gaps and priorities
 
@@ -247,4 +269,6 @@ Files under `data/examples/` and the synthetic records created in tests are
 ## What comes next
 
 - Systematic evidence extraction from the catalogued authoritative sources.
-- Building a comparative case-study construction layer on the stable pipeline.
+- Writing the final case-study narrative on top of the dossier framework
+  (`docs/case-study-framework.md`), keeping every statement traceable to an
+  evidence id.
