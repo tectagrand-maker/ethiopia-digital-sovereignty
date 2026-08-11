@@ -4,6 +4,12 @@ This document records where the current corpus does **not** yet support an
 evidence-based assessment. A gap is a statement about the corpus, never a
 negative finding about Ethiopia (or any other jurisdiction).
 
+> **Step 9**: the reproducible, machine-readable gap framework — discovery,
+> classification, prioritization, research actions and evidence-expansion
+> guidance — lives in `docs/research-gap-framework.md` and is generated with
+> `python -m src.cli research-gaps`. This page documents the current corpus
+> gaps that the Step 9 framework derives from.
+
 ## Dimensions with no evidence
 
 Three of the twelve governance dimensions currently have no real evidence

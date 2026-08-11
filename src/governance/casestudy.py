@@ -35,6 +35,7 @@ from src.governance.comparison import (
     EvidenceTrace, ConflictRef, case_dimension_view, _cell_observations,
     available_cases, comparative_analysis,
 )
+from src.governance.research_gaps import gaps_for_jurisdiction
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 CASES_MANIFEST = os.path.join(REPO_ROOT, 'data', 'cases', 'cases.json')
@@ -114,6 +115,17 @@ class ComparativeContext(BaseModel):
     dimension_notes: Dict[str, List[str]] = {}
 
 
+class GapReference(BaseModel):
+    """Reference to a Step 9 prioritized research gap (not a duplication of
+    its definition)."""
+    gap_id: str
+    category: str
+    scope: str
+    dimension: str
+    evidence_status: str
+    priority_level: str
+
+
 class CaseStudyDossier(BaseModel):
     dossier_type: str = DOSSIER_TYPE
     schema_version: int = SCHEMA_VERSION
@@ -121,6 +133,7 @@ class CaseStudyDossier(BaseModel):
     dimension_profiles: List[DimensionProfile]
     synthesis: CaseSynthesis
     comparative_context: ComparativeContext
+    gap_references: List[GapReference] = []
 
     @field_validator('dimension_profiles')
     @classmethod
@@ -364,6 +377,7 @@ def case_study_dossier(jurisdiction, comparators=None):
         "dimension_profiles": profiles,
         "synthesis": _synthesis(jurisdiction, profiles),
         "comparative_context": _comparative_context(jurisdiction, comparators),
+        "gap_references": gaps_for_jurisdiction(jurisdiction),
     }
 
 
@@ -480,4 +494,14 @@ def dossier_to_markdown(dossier):
     lines.append("")
     lines.append(dossier["comparative_context"]["note"])
     lines.append("")
+    if dossier.get("gap_references"):
+        lines.append("## Prioritized research gap references (Step 9)")
+        lines.append("")
+        lines.append("References to the research-gap plan; definitions are not "
+                     "duplicated here (see `python -m src.cli research-gaps`).")
+        lines.append("")
+        for ref in dossier["gap_references"]:
+            lines.append(f"- {ref['gap_id']} ({ref['priority_level']}, "
+                         f"`{ref['category']}`, scope {ref['scope']})")
+        lines.append("")
     return "\n".join(lines)

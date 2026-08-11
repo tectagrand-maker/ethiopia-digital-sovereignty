@@ -27,6 +27,9 @@ from src.governance.comparison import (
 from src.governance.casestudy import (
     case_study_dossier, validate_dossier, dossier_to_json, dossier_to_markdown,
 )
+from src.governance.research_gaps import (
+    research_plan, validate_plan, plan_to_json, plan_to_markdown,
+)
 
 
 def _source_row(s):
@@ -193,6 +196,30 @@ def main(argv=None):
         help="Validate the dossier against the output schema and database before printing",
     )
 
+    # ---- research-gaps ----
+    rg_parser = subparsers.add_parser(
+        "research-gaps",
+        help="Research gap prioritization and evidence expansion plan (Step 9)",
+    )
+    rg_parser.add_argument(
+        "--case", default=None,
+        help="Filter gaps to a jurisdiction (default: all cases)",
+    )
+    rg_parser.add_argument(
+        "--dimension", default=None,
+        help="Filter gaps to one of the 12 governance dimensions",
+    )
+    rg_parser.add_argument(
+        "--priority", default=None,
+        choices=["high", "medium", "low"],
+        help="Minimum priority level to include",
+    )
+    rg_parser.add_argument("--format", choices=["json", "markdown"], default="json")
+    rg_parser.add_argument(
+        "--validate", action="store_true",
+        help="Validate the plan against the output schema and database before printing",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "init":
@@ -322,6 +349,19 @@ def main(argv=None):
             else:
                 print(dossier_to_markdown(dossier))
         except (ValueError, KeyError) as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+    elif args.command == "research-gaps":
+        try:
+            plan = research_plan(case=args.case, dimension=args.dimension,
+                                 min_priority=args.priority)
+            if args.validate:
+                validate_plan(plan)
+            if args.format == "json":
+                print(plan_to_json(plan))
+            else:
+                print(plan_to_markdown(plan))
+        except ValueError as e:
             print(f"Error: {e}")
             sys.exit(1)
     else:

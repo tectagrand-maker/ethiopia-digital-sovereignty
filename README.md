@@ -16,6 +16,7 @@ This is a **research infrastructure** repository. It currently contains:
 - Governance observations linked to evidence (12 dimensions)
 - Executable comparative analysis (JSON / CSV)
 - An evidence-backed case-study dossier framework (JSON / Markdown)
+- A research-gap prioritization and evidence-expansion framework
 - A research-coverage status report
 - A small **real** source catalog + a small **real** evidence corpus
 - Synthetic demonstration fixtures, clearly labelled
@@ -44,6 +45,8 @@ GOVERNANCE OBSERVATION
 COMPARATIVE ANALYSIS
       ↓
 CASE-STUDY DOSSIER
+      ↓
+RESEARCH-GAP PRIORITIZATION
 ```
 
 ## Installation
@@ -203,6 +206,25 @@ id; the dossier is validated against a pydantic schema and the database
 writing is generated, never a score or ranking. See
 `docs/case-study-framework.md`.
 
+## Research-gap prioritization framework (Step 9)
+
+```bash
+python -m src.cli research-gaps                                 # full plan (JSON)
+python -m src.cli research-gaps --case Ethiopia --priority high  # filter by case/priority
+python -m src.cli research-gaps --dimension transparency --format markdown
+python -m src.cli research-gaps --validate                       # schema + integrity check
+```
+
+Derives research gaps from the committed evidence database, classifies them
+(`evidence_coverage`, `source_diversity`, `source_quality`, `temporal_coverage`,
+`confidence_limitation`, `methodological_limitation`, `conflicting_evidence`,
+`comparative_coverage`), prioritizes them with a documented, explainable rule
+(never a governance score or country ranking), and generates structured
+research actions with recommended source types and research questions.
+Evidence expansion always flows through the ingestion/provenance pipeline
+(`evidence_expansion_requirements()` / `validate_evidence_record()`). See
+`docs/research-gap-framework.md`.
+
 ## Research status
 
 ```bash
@@ -250,6 +272,9 @@ Files under `data/examples/` and the synthetic records created in tests are
   and the Step 7 comparative governance analysis
 - `docs/case-study-framework.md` — the Step 8 evidence-backed case-study dossier
   framework (data model, validation, narrative workflow)
+- `docs/research-gap-framework.md` — the Step 9 research-gap prioritization and
+  evidence-expansion framework (discovery, classification, prioritization,
+  research actions, how to add evidence)
 - `docs/evidence-matrix.md` — Step 6 matrix, status derivation, evidence basis
 - `docs/research-gaps.md` — current corpus gaps and priorities
 
@@ -268,7 +293,8 @@ Files under `data/examples/` and the synthetic records created in tests are
 
 ## What comes next
 
-- Systematic evidence extraction from the catalogued authoritative sources.
+- Executing the prioritized research actions from `research-gaps` and closing
+  the `high`-priority gaps through the standard ingestion pipeline.
 - Writing the final case-study narrative on top of the dossier framework
   (`docs/case-study-framework.md`), keeping every statement traceable to an
   evidence id.
