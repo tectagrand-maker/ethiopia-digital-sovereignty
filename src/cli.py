@@ -38,6 +38,10 @@ from src.governance.narrative import (
     case_study_narrative, validate_narrative,
     narrative_to_json, narrative_to_markdown,
 )
+from src.governance.academic import (
+    build_academic_draft, validate_academic_draft,
+    academic_to_json, academic_to_markdown,
+)
 
 
 def _source_row(s):
@@ -272,6 +276,28 @@ def main(argv=None):
         help="Validate the narrative against the output schema and database before printing",
     )
 
+    # ---- academic-draft ----
+    academic_parser = subparsers.add_parser(
+        "academic-draft",
+        help="Evidence-backed academic research draft (Step 13)",
+    )
+    academic_parser.add_argument(
+        "--case", default=None,
+        help="Jurisdiction to build the draft for (default: Ethiopia)",
+    )
+    academic_parser.add_argument(
+        "--comparators", default="",
+        help="Comma-separated comparators (default: all other available cases)",
+    )
+    academic_parser.add_argument(
+        "--format", choices=["json", "markdown"], default="json",
+        help="Output format",
+    )
+    academic_parser.add_argument(
+        "--validate", action="store_true",
+        help="Validate the draft against the output schema and database before printing",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "init":
@@ -438,6 +464,19 @@ def main(argv=None):
                 print(narrative_to_json(narrative))
             else:
                 print(narrative_to_markdown(narrative))
+        except (ValueError, KeyError) as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+    elif args.command == "academic-draft":
+        comparators = [c.strip() for c in args.comparators.split(",") if c.strip()] or None
+        try:
+            draft = build_academic_draft(args.case, comparators)
+            if args.validate:
+                validate_academic_draft(draft)
+            if args.format == "json":
+                print(academic_to_json(draft))
+            else:
+                print(academic_to_markdown(draft))
         except (ValueError, KeyError) as e:
             print(f"Error: {e}")
             sys.exit(1)
